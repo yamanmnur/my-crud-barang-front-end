@@ -15,6 +15,11 @@ class ApiRoute {
 
         this.getAllPeminta = "api/users"
         this.getBarang = "api/barang"
+
+        this.getDetailBarang = "api/barang/"
+        this.postDataBarang = "api/barang"
+        this.updateDataBarang = "api/update-barang"
+        this.deleteDataBarang = "api/barang/"
     }
   
   }

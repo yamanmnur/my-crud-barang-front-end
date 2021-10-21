@@ -4,11 +4,11 @@
         style="background: #1a3665; color: white"
         class="d-flex align-items-center font-weight-bold"
       >
-        Permintaan Barang
+        Barang
         <CButton
           color="info"
           style="float: right"
-          @click="tambahPermintaan"
+          @click="tambahBarang"
           class="btn-md ml-auto button-md-block px-3"
           >Tambah</CButton
         >
@@ -43,6 +43,7 @@
                   Edit
                 
                 </CButton>
+             
               &nbsp;&nbsp;
                 <CButton
                   square
@@ -74,18 +75,21 @@
           </template>
         </CDataTable>  
       </CCardBody>
-   
+      <my-modal></my-modal>
     </CCard>
     
 </template>
 <script>
-import PermintaanService from "../services/permintaan/PermintaanService" 
-import { AlertUtils } from "../services/AlertUtils";
+import { mapActions } from 'vuex';
 
+import BarangService from "../services/barang/BarangService" 
+import { AlertUtils } from "../services/AlertUtils";
+import ModalPermintaan from './ModalPermintaan.vue'
 const fields = [
   { key: 'kode', _style:'min-width:200px' },
-  { key: 'nama_user', label : 'User', _style:'min-width:100px;' },
-  { key: 'tanggal_permintaan', _style:'min-width:100px;' },
+  { key: 'nama', label : 'Nama', _style:'min-width:100px;' },
+  { key: 'lokasi', _style:'min-width:100px;' },
+  { key: 'status', _style:'min-width:100px;' },
   { 
     key: 'show_details', 
     label: '', 
@@ -97,6 +101,9 @@ const fields = [
 
 export default {
   mixins : [AlertUtils],
+  components: {
+        'my-modal': ModalPermintaan,
+  },
   name: 'AdvancedTables',
   data () {
     return {
@@ -109,7 +116,12 @@ export default {
   mounted() {
     this.getData();
   },
+  computed : {
+
+  },
   methods: {
+    ...mapActions(['getDetailBarang']),
+  
     deleteData(item) {
       var vm = this;
       this.$swal
@@ -126,7 +138,7 @@ export default {
         })
         .then((result) => {
         if (result.value) {
-          PermintaanService.deleteData(item.id)
+          BarangService.deleteData(item.id)
             .then((response) => {
               vm.alertDeleteSuccess();
               vm.getData()
@@ -145,14 +157,21 @@ export default {
       });
     },
     updateData(item) {
-      this.$router.push({ path : '/dashboard/edit-permintaan/'+item.id})
+      this.$router.push({ path : '/dashboard/edit-barang/'+item.id})
     },
-    tambahPermintaan() {
-      this.$router.push( { path : '/dashboard/tambah-permintaan'})
+    tambahBarang() {
+      this.$router.push( { path : '/dashboard/tambah-barang'})
     },
     getData() {
-      PermintaanService.getData()
+      let loader = this.$loading.show({
+          // Optional parameters
+          container: this.fullPage ? null : this.$refs.formContainer,
+          canCancel: true,
+          onCancel: this.onCancel,
+      });
+      BarangService.getData()
       .then(response => {
+        loader.hide();
         this.items = response.data.data
       })
     },

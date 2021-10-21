@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // Permintaan
-const TambahPermintaan = () => import('@/views/permintaan/TambahPermintaan')
-const EditPermintaan = () => import('@/views/permintaan/EditPermintaan')
+const TambahBarang = () => import('@/views/barang/TambahBarang')
+const EditBarang = () => import('@/views/barang/EditBarang')
 
 // Containers
 const TheContainer = () => import('@/containers/TheContainer')
@@ -81,18 +81,18 @@ function configRoutes () {
       children: [
         {
           path: 'dashboard',
-          name: 'Permintaan Barang',
+          name: 'Barang',
           component: Dashboard
         },
         {
-          path: 'dashboard/tambah-permintaan',
-          name: 'Permintaan Barang - Tambah',
-          component: TambahPermintaan
+          path: 'dashboard/tambah-Barang',
+          name: 'Barang - Tambah',
+          component: TambahBarang
         },
         {
-          path: 'dashboard/edit-permintaan/:id',
-          name: 'Permintaan Barang - Edit',
-          component: EditPermintaan
+          path: 'dashboard/edit-barang/:id',
+          name: 'Barang - Edit',
+          component: EditBarang
         },
         {
           path: 'Modul',

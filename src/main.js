@@ -15,6 +15,11 @@ Vue.use(CoreuiVue)
 Vue.prototype.$log = console.log.bind(console)
 Vue.component('multiselect', Multiselect)
 
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
+Vue.use(Loading);
+
 new Vue({
   el: '#app',
   router,

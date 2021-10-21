@@ -11,8 +11,21 @@ class BarangService {
     return axios.get(API_URL + ApiRoute.getBarang);
   }
 
-   
+  getDetailData(id) {
+    return axios.get(API_URL + ApiRoute.getDetailBarang + id);
+  }
 
+  postData(formData) {
+    return axios.post(API_URL + ApiRoute.postDataBarang, formData);
+  }
+
+  updateData(formData) {
+    return axios.put(API_URL + ApiRoute.updateDataBarang, formData)
+  }
+
+  deleteData(id) {
+    return axios.delete(API_URL + ApiRoute.deleteDataBarang + id)
+  }
 
 }
 

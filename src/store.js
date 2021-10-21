@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { auth } from './stores/auth.module';
 import { request } from './stores/request.modul';
-
+import { permintaan } from './stores/permintaan.module'
+import { barang } from './stores/barang.module'
 Vue.use(Vuex)
 
 const state = {
@@ -27,7 +28,9 @@ const mutations = {
 export default new Vuex.Store({
   modules: {
     auth,
-    request
+    request,
+    permintaan,
+    barang,
   },
   state,
   mutations
