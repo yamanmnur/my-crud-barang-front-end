@@ -28,7 +28,8 @@
           <template #status="{item}">
             <td>
               <CBadge :color="getBadge(item.status)">
-                {{item.status}}
+                <template v-if="item.status == 1">Aktif</template>
+                <template v-if="item.status == 0">Tidak Aktif</template>
               </CBadge>
             </td>
           </template>
@@ -163,24 +164,16 @@ export default {
       this.$router.push( { path : '/dashboard/tambah-barang'})
     },
     getData() {
-      let loader = this.$loading.show({
-          // Optional parameters
-          container: this.fullPage ? null : this.$refs.formContainer,
-          canCancel: true,
-          onCancel: this.onCancel,
-      });
+      
       BarangService.getData()
       .then(response => {
-        loader.hide();
         this.items = response.data.data
       })
     },
     getBadge (status) {
       switch (status) {
-        case 'Active': return 'success'
-        case 'Inactive': return 'secondary'
-        case 'Pending': return 'warning'
-        case 'Banned': return 'danger'
+        case '1': return 'success'
+        case '0': return 'danger'
         default: 'primary'
       }
     },

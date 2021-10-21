@@ -118,15 +118,9 @@ export default {
   },
   methods: {
     postData() {
-        let loader = this.$loading.show({
-            // Optional parameters
-            container: this.fullPage ? null : this.$refs.formContainer,
-            canCancel: true,
-            onCancel: this.onCancel,
-        });
+       
         BarangService.updateData(this.formData)
         .then(response => {
-          loader.hide()
           this.alertSuccess();
           this.$router.push('/dashboard')
         })

@@ -20,6 +20,7 @@
                 <input
                   type="text"
                   class="form-control"
+                  required
                   v-model="formData.nama"
                 />
               </div>
@@ -27,6 +28,7 @@
                 <label for="no_izin" class="font-weight-bold">Kuantiti</label>
                 <input
                   type="number"
+                  required
                   class="form-control"
                   v-model="formData.kuantiti"
                 />
@@ -36,6 +38,7 @@
                 <label for="no_izin" class="font-weight-bold">Lokasi</label>
                 <input
                   type="text"
+                  required
                   class="form-control"
                   v-model="formData.lokasi"
                 />
@@ -45,6 +48,7 @@
                 <label for="no_izin" class="font-weight-bold">Satuan</label>
                 <input
                   type="text"
+                  required
                   class="form-control"
                   v-model="formData.satuan"
                 />
@@ -52,7 +56,7 @@
 
               <div class="form-group col-md-6">
                 <label for="no_izin" class="font-weight-bold">Status</label>
-                <select name="" class="form-control" id="" v-model="formData.status">
+                <select name="" class="form-control" id="" required v-model="formData.status">
                   <option value="1">Aktif</option>
                   <option value="0">Tidak Aktif</option>
                 </select>
@@ -96,15 +100,9 @@ export default {
   },
   methods: {
     postData() {
-        let loader = this.$loading.show({
-            // Optional parameters
-            container: this.fullPage ? null : this.$refs.formContainer,
-            canCancel: true,
-            onCancel: this.onCancel,
-        });
+       
         BarangService.postData(this.formData)
         .then(response => {
-            loader.hide();
             this.alertSuccess();
             this.$router.push('/dashboard')
         })
